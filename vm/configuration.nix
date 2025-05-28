@@ -20,7 +20,7 @@
   environment.systemPackages = with pkgs; [
     firefox
     konsole
-    nano      # заменили vim на nano
+    nano
     git
     wget
   ];
@@ -28,7 +28,7 @@
   users.users.fremen = {
     isNormalUser = true;
     extraGroups = [ "wheel" "networkmanager" ];
-    password = "fremen";   # Можешь сменить после установки!
+    password = "fremen";
   };
 
   security.sudo.wheelNeedsPassword = false;

@@ -1,0 +1,41 @@
+{ config, pkgs, ... }:
+
+{
+  imports = [ ./disko-config.nix ];
+
+  networking.hostName = "pc";
+  time.timeZone = "Europe/Moscow";
+
+  services.xserver = {
+    enable = true;
+    layout = "us,ru";
+    xkbOptions = "grp:alt_shift_toggle";
+    displayManager.sddm.enable = true;
+    desktopManager.plasma5.enable = false;
+  };
+
+  services.xserver.desktopManager.gnome.enable = false;
+  programs.hyprland.enable = true;
+
+  environment.systemPackages = with pkgs; [
+    firefox
+    konsole
+    nano
+    git
+    wget
+  ];
+
+  users.users.fremen = {
+    isNormalUser = true;
+    extraGroups = [ "wheel" "networkmanager" ];
+    password = "fremen";
+  };
+
+  security.sudo.wheelNeedsPassword = false;
+
+  networking.networkmanager.enable = true;
+  services.openssh.enable = true;
+
+  # Автоматическая гибернация — swap с label "swap"
+  boot.resumeDevice = "/dev/disk/by-label/swap";
+}

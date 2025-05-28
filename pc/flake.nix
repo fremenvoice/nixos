@@ -1,5 +1,5 @@
 {
-  description = "NixOS VM install with Disko and Hyprland";
+  description = "NixOS PC install with Disko, Hyprland, swap and hibernation (auto)";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.05";
@@ -8,7 +8,7 @@
   };
 
   outputs = { self, nixpkgs, disko, hyprland, ... }: {
-    nixosConfigurations.vm = nixpkgs.lib.nixosSystem {
+    nixosConfigurations.pc = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       modules = [
         ./configuration.nix
