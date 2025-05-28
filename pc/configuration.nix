@@ -3,8 +3,12 @@
 {
   imports = [ ./disko-config.nix ];
 
-  networking.hostName = "pc";
-  time.timeZone = "Europe/Moscow";
+  # GRUB bootloader (требуется для загрузки!)
+  boot.loader.grub.enable = true;
+  boot.loader.grub.devices = [ "/dev/sda" ];
+
+  networking.hostName = "vm";
+  time.timeZone = "Europe/Samara";
 
   services.xserver = {
     enable = true;
@@ -35,7 +39,4 @@
 
   networking.networkmanager.enable = true;
   services.openssh.enable = true;
-
-  # Автоматическая гибернация — swap с label "swap"
-  boot.resumeDevice = "/dev/disk/by-label/swap";
 }

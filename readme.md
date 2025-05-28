@@ -62,3 +62,11 @@
 * [NixOS Wiki: Hibernate](https://nixos.wiki/wiki/Suspend_and_hibernate#Using_swap_partition)
 
 **Установка полностью автоматизирована, swap/гибернация на PC работает без ручной правки UUID!**
+sudo -i
+nix-shell -p git
+git clone https://github.com/fremenvoice/nixos.git
+cd nixos/vm
+export NIX_CONFIG="experimental-features = nix-command flakes"
+chmod +x install.sh
+./install.sh
+reboot
