@@ -3,11 +3,9 @@
 {
   imports = [ ./disko-config.nix ];
 
-  # Hostname
   networking.hostName = "vm";
   time.timeZone = "Europe/Moscow";
 
-  # Русско-английская раскладка, переключение Alt+Shift
   services.xserver = {
     enable = true;
     layout = "us,ru";
@@ -19,28 +17,22 @@
   services.xserver.desktopManager.gnome.enable = false;
   programs.hyprland.enable = true;
 
-  # Установка нужных пакетов
   environment.systemPackages = with pkgs; [
     firefox
     konsole
-    vim
+    nano      # заменили vim на nano
     git
     wget
   ];
 
-  # Пользователь
-  users.users.nixos = {
+  users.users.fremen = {
     isNormalUser = true;
     extraGroups = [ "wheel" "networkmanager" ];
-    password = "nixos";
+    password = "fremen";   # Можешь сменить после установки!
   };
 
-  # Разрешаем sudo
   security.sudo.wheelNeedsPassword = false;
 
-  # Сеть через NetworkManager
   networking.networkmanager.enable = true;
-
-  # Включить OpenSSH
   services.openssh.enable = true;
 }
